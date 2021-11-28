@@ -3,6 +3,12 @@ use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
 
+///    
+///    Conexión con la base de datos haciendo uso del módulo pg de
+///    Diesel, mediante la variable de entorno DATABASE_URL del
+///    archivo .env
+/// 
+/// 
 pub fn database_connection() -> PgConnection {
     dotenv().ok();
 

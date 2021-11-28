@@ -18,8 +18,16 @@ pub mod schema;
 #[launch]
 fn rocket() -> _ {
     rocket::build().mount("/", routes![
+
+        //Rutas para CreditCards
         controllers::credit_cards::index,
         controllers::credit_cards::show,
-        controllers::credit_cards::create
+        controllers::credit_cards::create,
+        controllers::credit_cards::update,
+
+        //Rutas para Payments
+        controllers::payments::index,
+        controllers::payments::show_payment,
+        controllers::payments::create
     ])
 }

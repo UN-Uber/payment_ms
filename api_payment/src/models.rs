@@ -1,6 +1,7 @@
 use crate::schema::*;
 use rocket::serde::{ Serialize, Deserialize };
-use diesel::{ Insertable, Queryable};
+use diesel::{Insertable, Queryable };
+use chrono::{ NaiveDateTime };
 
 #[derive(Serialize, Queryable, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -11,14 +12,14 @@ pub struct CreditCard {
     pub intermediary: String
 }
 
-#[derive(Serialize, Queryable)]
+#[derive(Serialize, Queryable, AsChangeset)]
 #[serde(rename_all = "camelCase")]
 pub struct Payment {
     pub id: i32,
     pub user_id: i32,
-    pub payment_date: chrono::DateTime<chrono::Utc>,
+    pub credit_card_id: i32,
+    pub payment_date: NaiveDateTime,
     pub amount: i32,
-    pub credit_card_id: i32
 }
 
 #[derive(Deserialize, Insertable)]
@@ -26,7 +27,7 @@ pub struct Payment {
 #[table_name = "credit_cards"]
 pub struct NewCreditCard {
     pub user_card_id: i32,
-    pub balance: i32,
+    pub balance: Option<i32>,
     pub intermediary: String 
 }
 
@@ -35,7 +36,7 @@ pub struct NewCreditCard {
 #[table_name = "payments"]
 pub struct NewPayment {
     pub user_id: i32,
-    pub payment_date: chrono::NaiveDateTime,
+    pub payment_date: Option<NaiveDateTime>,
     pub amount: i32,
     pub credit_card_id: i32 
 }
