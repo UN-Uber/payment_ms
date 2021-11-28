@@ -3,7 +3,7 @@ Microservicio encargado de los medios de pago, está en Rust
 
 ## DOCKER
 Pendiente :sweat_smile:  
-Mentras tanto, si se desea, para poder ejecutar el microservicio se a continuación se mencionan los pasos para poder ejecutarlo
+Mentras tanto, si se desea, para poder ejecutar el microservicio a continuación se mencionan los pasos para poder ejecutarlo
 
 ## Instalación
 
@@ -47,6 +47,10 @@ Teniendo el repositorio clonado y estando en la carpeta `api_payment/` ejecutar 
 
     cargo build
     cargo watch -x run
+
+    // También se puede de la siguiente manera, pero no se reflejarán los cambios cada vez que se guarde
+    cargo build
+    cargo run
 
 La aplicación se ejecutará en `localhost:8000`.  
 Nota: `cargo build` es necesario la primera vez que se ejecuta el proyecto o también cada vez que se añade una nueva dependencia en la sección `[dependencies]` del archivo `Cargo.toml`
