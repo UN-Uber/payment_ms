@@ -4,30 +4,33 @@
 extern crate rocket;
 #[macro_use]
 extern crate diesel;
-#[macro_use]
-extern crate dotenv;
-extern crate serde;
-extern crate serde_json;
 
-pub mod controllers;
-pub mod database;
-pub mod models;
-pub mod schema;
+mod controllers;
+mod database;
+mod models;
+mod schema;
+
+#[get("/")]
+pub fn hello () -> &'static str {
+    "Raiz de la API de Payments"
+}
 
 
 #[launch]
 fn rocket() -> _ {
     rocket::build().mount("/", routes![
 
+        hello,
+
         //Rutas para CreditCards
-        controllers::credit_cards::index,
-        controllers::credit_cards::show,
-        controllers::credit_cards::create,
-        controllers::credit_cards::update,
+        controllers::credit_cards_controller::index,
+        controllers::credit_cards_controller::show,
+        controllers::credit_cards_controller::create,
+        controllers::credit_cards_controller::update,
 
         //Rutas para Payments
-        controllers::payments::index,
-        controllers::payments::show_payment,
-        controllers::payments::create
+        controllers::payments_controller::index,
+        controllers::payments_controller::show_payment,
+        controllers::payments_controller::create
     ])
 }
