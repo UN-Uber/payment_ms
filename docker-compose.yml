@@ -1,0 +1,35 @@
+version: '3.7'
+
+
+services:
+  db:
+    image: postgres:latest
+    container_name: payment_db
+    ports: 
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: "payment"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "payment_db"
+    # networks:
+    #  - payments-api
+  
+  api:
+    container_name: payment_ms
+    restart: on-failure
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgres://payment:password@db/payment_db"
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    #networks:
+    #  - payments-api
+
+#networks:
+# payments-api:
+#  driver: bridge

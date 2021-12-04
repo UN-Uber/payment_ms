@@ -2,8 +2,17 @@
 Microservicio encargado de los medios de pago, está en Rust
 
 ## DOCKER
-Pendiente :sweat_smile:  
-Mentras tanto, si se desea, para poder ejecutar el microservicio a continuación se mencionan los pasos para poder ejecutarlo
+Para ejecutar los contenedores del microservicio y la base de datos en la carpeta `payment_ms` ejecutar:
+
+    docker-compose up -d // tarda 7 mins aprox y pesa 5GB.
+
+
+Una vez que los contenedores están en ejecución hay que ejecutar la migración:
+
+    docker exec -it container_id // id del contenedor payment_ms
+    diesel migration run
+
+Queda pendiente la optimización del tamaño del contenedor (reducir las 5GB).
 
 ## Instalación
 
@@ -15,6 +24,10 @@ Para poder usar Rust es necesario instalar **Rustup**, el cual es un instalador 
 Para comprobar que **Rustup** quedó instalado correctamente:
 
     rustup --version
+
+Como Rocket.rs usa la versión nightly de rust es necesario ejecutar:
+
+    rustup default nightly
 
 ### Instalar Cargo Watch
 Rustup incluye también rustc, que es el compilador, y cargo, el cual es el package manager de Rust. Pero para poder visualizar los cambios en la aplicación, es decir, que la aplicación se compile y ejecute cada vez que se realiza un cambio es necesario instalar cargo watch
