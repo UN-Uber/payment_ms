@@ -7,7 +7,7 @@ use chrono::{ NaiveDateTime };
 #[derive(Serialize, Queryable, AsChangeset)]
 #[serde(rename_all = "camelCase")]
 pub struct Payment {
-    pub id: i32,
+    pub payment_id: i32,
     pub user_id: i32,
     pub credit_card_id: i32,
     pub payment_date: NaiveDateTime,

@@ -7,7 +7,7 @@ use diesel::{Insertable, Queryable };
 #[serde(rename_all = "camelCase")]
 pub struct CreditCard {
     pub id: i32,
-    pub user_card_id: i32,
+    pub credit_card_fk: i32,
     pub balance: i32,
     pub intermediary: String
 }
@@ -17,7 +17,7 @@ pub struct CreditCard {
 #[serde(rename_all = "camelCase")]
 #[table_name = "credit_cards"]
 pub struct NewCreditCard {
-    pub user_card_id: i32,
+    pub credit_card_fk: i32,
     pub balance: Option<i32>,
     pub intermediary: String 
 }

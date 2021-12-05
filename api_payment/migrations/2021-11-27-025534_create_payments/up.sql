@@ -1,5 +1,5 @@
 CREATE TABLE payments (
-    id SERIAL PRIMARY KEY,
+    payment_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     credit_card_id INTEGER NOT NULL,
     payment_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,

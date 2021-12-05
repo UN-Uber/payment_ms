@@ -1,15 +1,15 @@
 table! {
     credit_cards (id) {
         id -> Int4,
-        user_card_id -> Int4,
+        credit_card_fk -> Int4,
         balance -> Int4,
         intermediary -> Varchar,
     }
 }
 
 table! {
-    payments (id) {
-        id -> Int4,
+    payments (payment_id) {
+        payment_id -> Int4,
         user_id -> Int4,
         credit_card_id -> Int4,
         payment_date -> Timestamp,
