@@ -4,7 +4,7 @@ Microservicio encargado de los medios de pago, está en Rust
 ## DOCKER
 Para ejecutar los contenedores del microservicio y la base de datos en la carpeta `payment_ms` ejecutar:
 
-    docker-compose up -d // tarda 7 mins aprox y pesa 5GB.
+    docker-compose up -d // tarda 10 mins aprox.
 
 
 Una vez que los contenedores están en ejecución hay que ejecutar la migración:
@@ -12,7 +12,7 @@ Una vez que los contenedores están en ejecución hay que ejecutar la migración
     docker exec -it container_id // id del contenedor payment_ms
     diesel migration run
 
-Queda pendiente la optimización del tamaño del contenedor (reducir las 5GB).
+Queda pendiente una posible optimización del tamaño del contenedor, de momento ya se redujo el peso a ~2.6 GB.
 
 ## Instalación
 
