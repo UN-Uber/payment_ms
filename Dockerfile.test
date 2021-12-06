@@ -1,0 +1,32 @@
+FROM ubuntu:20.04 as build
+
+WORKDIR payment_ms/
+
+RUN apt-get update && apt-get install -y curl libpq-dev build-essential
+
+# Instala la versión de rust 1.58 nightly
+RUN curl https://sh.rustup.rs/ -sSf | \
+  sh -s -- -y --default-toolchain nightly-2021-11-25
+
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+RUN cargo install diesel_cli --no-default-features --features postgres
+
+COPY . .
+
+WORKDIR api_payment/
+
+RUN cargo build --release
+
+
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y curl libpq-dev build-essential
+
+#RUN cargo install diesel_cli --no-default-features --features postgres
+
+COPY --from=build /api_payment/target/release/api_payment /usr/local/bin/
+
+WORKDIR /root
+
+CMD ROCKET_PORT=9000 /usr/local/bin/api_payment

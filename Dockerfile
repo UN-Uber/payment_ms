@@ -14,8 +14,4 @@ WORKDIR api_payment/
 
 RUN cargo build --release
 
-#RUN echo DATABASE_URL=postgres://payment:password@payment_db/payment_db > .env
-
-EXPOSE 8000
-
-CMD ["cargo", "run", "--release"]
+CMD cargo run --release
