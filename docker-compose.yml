@@ -12,8 +12,6 @@ services:
       POSTGRES_USER: "payment"
       POSTGRES_PASSWORD: "password"
       POSTGRES_DB: "payment_db"
-    # networks:
-    #  - payments-api
   
   api:
     container_name: payment_ms
@@ -26,10 +24,5 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
-    #networks:
-    #  - payments-api
-
-#networks:
-# payments-api:
-#  driver: bridge
+      - '${PORT:-8080}:8000'
+    #command: bash -c "../wait-for-it/wait-for-it.sh db:5432 -- diesel migration run && cargo run --release"

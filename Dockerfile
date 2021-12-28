@@ -1,8 +1,6 @@
-FROM rust:1.56
+FROM rust:1.57
 
 WORKDIR payment_ms/
-
-RUN rustup default nightly
 
 RUN apt update && apt install libpq-dev
 
@@ -10,8 +8,8 @@ RUN cargo install diesel_cli --no-default-features --features postgres
 
 COPY . .
 
-WORKDIR api_payment/
+#RUN git clone https://github.com/vishnubob/wait-for-it.git
 
-RUN cargo build --release
+WORKDIR api_payment/
 
 CMD cargo run --release
