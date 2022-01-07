@@ -8,8 +8,10 @@ RUN cargo install diesel_cli --no-default-features --features postgres
 
 COPY . .
 
-#RUN git clone https://github.com/vishnubob/wait-for-it.git
+RUN git clone https://github.com/vishnubob/wait-for-it.git
 
 WORKDIR api_payment/
 
-CMD cargo run --release
+RUN cargo build --release
+
+#CMD cargo run --release

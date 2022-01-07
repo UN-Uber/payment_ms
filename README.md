@@ -6,13 +6,7 @@ Para ejecutar los contenedores del microservicio y la base de datos en la carpet
 
     docker-compose up -d // tarda 10 mins aprox.
 
-
-Una vez que los contenedores están en ejecución hay que ejecutar la migración:
-
-    docker exec -it container_id // id del contenedor payment_ms
-    diesel migration run
-
-Queda pendiente una posible optimización del tamaño del contenedor, de momento ya se redujo el peso a ~2.6 GB.
+Nota: la migración se ejecuta durante la creación de los contenedores, sin embargo, el tiempo que toma la instalación de diesel como el de `cargo build --release` imposibilita su despliegue en Cloud Run debido a que supera el tiempo limite de este (4 mins), por lo tanto, para su despliegue requiere una máquina virtual.
 
 ## Instalación
 
@@ -24,10 +18,6 @@ Para poder usar Rust es necesario instalar **Rustup**, el cual es un instalador 
 Para comprobar que **Rustup** quedó instalado correctamente:
 
     rustup --version
-
-Como Rocket.rs usa la versión nightly de rust es necesario ejecutar:
-
-    rustup default nightly
 
 ### Instalar Cargo Watch
 Rustup incluye también rustc, que es el compilador, y cargo, el cual es el package manager de Rust. Pero para poder visualizar los cambios en la aplicación, es decir, que la aplicación se compile y ejecute cada vez que se realiza un cambio es necesario instalar cargo watch

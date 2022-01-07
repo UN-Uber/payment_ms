@@ -24,5 +24,5 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '${PORT:-8080}:8000'
-    #command: bash -c "../wait-for-it/wait-for-it.sh db:5432 -- diesel migration run && cargo run --release"
+      - '${PORT:-8000}:8000'
+    command: bash -c "../wait-for-it/wait-for-it.sh db:5432 -- diesel migration run && cargo run --release"
