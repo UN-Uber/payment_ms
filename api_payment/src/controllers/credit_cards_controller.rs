@@ -61,14 +61,26 @@ pub fn show (card_id: i32) -> Json<Vec<CreditCard>> {
 pub fn create (card: Json<NewCreditCard>)-> Json<CreditCard>{
     let conn = database::database_connection();
 
+    let number = card.intermediary.to_string();
+    let card_intermediary;
+    if number.starts_with("4"){
+        card_intermediary = "Visa";
+    }
+    else if number.starts_with("5") {
+        card_intermediary = "MasterCard";
+    }
+    else{
+        card_intermediary = "Otro";
+    }
+
     // Genera un saldo aleatorio a la nueva tarjeta
     let mut rng = rand::thread_rng();
-    let random_balance: i32 = rng.gen_range(200000..=400000);
+    let random_balance: i32 = rng.gen_range(500000..=700000);
 
     let new_card = (
         credit_card_fk.eq(card.credit_card_fk),
         balance.eq(random_balance),
-        intermediary.eq(card.intermediary.to_string())
+        intermediary.eq(card_intermediary)
     );
     let insert = diesel::insert_into(credit_cards)
         .values(&new_card).get_result::<CreditCard>(&conn).expect("Error");
